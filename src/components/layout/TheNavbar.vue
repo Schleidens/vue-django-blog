@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar navbar-expand-lg bg-dark border-bottom border-bottom-dark" data-bs-theme="dark">
+    <nav class="navbar navbar-expand-lg bg-dark border-bottom border-bottom-dark fixed-top" data-bs-theme="dark">
     <div class="container-fluid">
         <RouterLink class="navbar-brand" to="/">DV-Blog</RouterLink>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
