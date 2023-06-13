@@ -14,3 +14,8 @@ export async function login(username, password){
         console.log("Login failed", error.response.data.error[0])
     }
 }
+
+export function isAuthenticated(){
+    const token = localStorage.getItem('token');
+    return !!token;
+}
