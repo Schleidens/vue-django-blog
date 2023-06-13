@@ -11,6 +11,6 @@ export async function login(username, password){
         ApiService.defaults.headers.common['Authorization'] = `Token ${token}`
         return true;
     } catch (error) {
-        console.log("Login failed", error)
+        console.log("Login failed", error.response.data.error[0])
     }
 }
