@@ -2,6 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import LoginView from '../views/LoginView.vue'
 
+import { isAuthenticated } from '../services/auth'
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -21,7 +23,15 @@ const router = createRouter({
     {
       path: '/login',
       name: 'login',
-      component: LoginView
+      component: LoginView,
+      beforeEnter (to, from, next) {
+        const isUserAuthenticated = isAuthenticated();
+        if (isUserAuthenticated) {
+          next({ name : 'home'})
+        } else {
+          next();
+        }
+      },
     }
   ]
 })
