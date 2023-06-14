@@ -6,7 +6,7 @@ export async function login(username, password){
         const response = await ApiService.post('login/', { username, password });
         const token = response.data.token
         //set token in localStorage
-        localStorage.setItem("token", token);
+        localStorage.setItem('token', token);
         //set the default Authorization header
         ApiService.defaults.headers.common['Authorization'] = `Token ${token}`
         return true;
@@ -18,4 +18,9 @@ export async function login(username, password){
 export function isAuthenticated(){
     const token = localStorage.getItem('token');
     return !!token;
+}
+
+export function logout(){
+    localStorage.removeItem('token');
+    delete ApiService.defaults.headers.common['Authorization'];
 }
