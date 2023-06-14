@@ -23,11 +23,9 @@
             <ul class="dropdown-menu dropdown-menu-lg-end p-0">
                 <li><a class="dropdown-item" href="#">Profile</a></li>
                 <li class="mt-1">
-                    <RouterLink class="nav-link" to="/login">
-                        <button type="button" class="btn btn-warning w-100">
+                        <button @click="logoutUser()" type="button" class="btn btn-warning w-100">
                             Logout
                         </button>
-                    </RouterLink>
                 </li>
             </ul>
         </div>
@@ -44,11 +42,18 @@
 </template>
 
 <script setup>
-import { RouterLink } from 'vue-router'
+import { RouterLink, useRouter } from 'vue-router'
 
-import { isAuthenticated } from '../../services/auth';
+import { isAuthenticated, logout } from '../../services/auth';
 
 const isUserAuthenticated = isAuthenticated()
+
+const router = useRouter()
+
+const logoutUser = () => {
+  logout();
+  router.push('/login');
+}
 </script>
 
 <style lang="scss" scoped>
