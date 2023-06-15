@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import LoginView from '../views/LoginView.vue'
+import SingleBlogView from '../views/SingleBlogView.vue'
 
 import { isAuthenticated } from '../services/auth'
 
@@ -19,6 +20,11 @@ const router = createRouter({
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import('../views/AboutView.vue')
+    },
+    {
+      path: '/blog/:slug',
+      name: 'blog',
+      component: SingleBlogView
     },
     {
       path: '/login',
