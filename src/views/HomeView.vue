@@ -1,4 +1,5 @@
 <script setup>
+import { RouterLink } from 'vue-router';
 import { onMounted } from 'vue';
 import { usePostStore } from '../stores/postStore'
 
@@ -14,7 +15,9 @@ onMounted(() => {
     <div v-for="item in store.posts" :key="item.id">
 
         <div class="card mb-3">
-            <img :src="item.cover" class="card-img-top cover" :alt="item.title">
+            <RouterLink :to="`blog/${item.slug}`">
+              <img :src="item.cover" class="card-img-top cover" :alt="item.title">
+            </RouterLink>
             <div class="card-body">
               <h5 class="card-title">{{ item.title }}</h5>
               <h6 class="card-title">{{ item.author.username }}</h6>
@@ -23,7 +26,7 @@ onMounted(() => {
               </p>
               <p class="card-text">
                 <small class="text-body-secondary">
-                  Last updated {{ item.updated_date  }}
+                  Last updated {{ new Date(item.updated_date).toLocaleString()  }}
                 </small>
               </p>
             </div>
@@ -40,7 +43,7 @@ onMounted(() => {
 
 .cover{
   height: 300px;
-  width: auto;
+  width: 100%;
 
   object-fit: cover;
 }
