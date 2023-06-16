@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import LoginView from '../views/LoginView.vue'
 import SingleBlogView from '../views/SingleBlogView.vue'
+import AddNewPostView from '../views/AddNewPostView.vue'
 
 import { isAuthenticated } from '../services/auth'
 
@@ -25,6 +26,11 @@ const router = createRouter({
       path: '/blog/:slug',
       name: 'blog',
       component: SingleBlogView
+    },
+    {
+      path: '/create/blog',
+      name: 'new-blog',
+      component: AddNewPostView
     },
     {
       path: '/login',
