@@ -17,6 +17,24 @@
             </div>
         </div>
 
+    <div class="comment-box">
+        <h3 class="fw-bold mb-3">Comment</h3>
+        <div v-if="comments" class="comment">
+            <div v-for="item in comments" :key="item.id" class="card mt-1">
+                <div v-if="item.author" class="card-header">
+                    {{ item.author.username }}
+                </div>
+
+                <div class="card-body">
+                    <p>{{ item.content }}</p>
+                </div>
+            </div>
+        </div>
+        <div v-if="noComment" class="no-comment">
+            This blog have no comment
+        </div>
+    </div>
+
 
     </div>
 </template>
@@ -32,6 +50,10 @@ const slug = router.params.slug
 
 const post = ref({})
 
+const comments = ref({})
+
+const noComment = ref(false)
+
 async function fetchSinglePost(){
         try {
             const response = await ApiService.get(`blogs/${slug}/`);
@@ -39,16 +61,31 @@ async function fetchSinglePost(){
         } catch (error) {
             console.log(error);
         }
+}
+
+async function fetchComment(){
+    try {
+        const response =  await ApiService.get(`comments/${slug}/`);
+        
+        if (response.data.length != 0) {
+            comments.value = response.data
+        } else {
+            noComment.value = true
+        }
+    } catch (error) {
+        console.log(error);
     }
+}
 
 onMounted(() => {
     fetchSinglePost();
+    fetchComment();
 })
 </script>
 
 <style lang="scss" scoped>
 .box{
-  margin: 4em 10em 0em 10em;
+  margin: 4em 10em 4em 10em;
 }
 
 .cover{
@@ -60,7 +97,12 @@ onMounted(() => {
 
 @media (max-width: 768px) {
 .box{
-  margin: 4em 2em 0em 2em;
+  margin: 4em 2em 4em 2em;
 }
+}
+
+.comment-box{
+    border-top: 1px solid rgb(104, 98, 98);
+    padding-top: 1em;
 }
 </style>
