@@ -13,4 +13,18 @@ ApiService.interceptors.request.use((config) => {
   return config;
 });
 
+ApiService.interceptors.response.use(
+  (response) => {
+    // Return the response as is if no error occurred
+    return response;
+  },
+  (error) => {
+    if (error.response.status === 401) {
+      // Token expired or authentication failed
+      localStorage.removeItem('token');
+    }
+    return Promise.reject(error);
+  }
+);
+
 export default ApiService;
