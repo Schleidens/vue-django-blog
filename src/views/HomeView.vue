@@ -1,7 +1,8 @@
 <script setup>
 import { RouterLink } from 'vue-router';
 import { onMounted } from 'vue';
-import { usePostStore } from '../stores/postStore'
+import { usePostStore } from '../stores/postStore';
+import AddNewPostButtonVue from '../components/AddNewPostButton.vue';
 
 const store = usePostStore()
 
@@ -12,6 +13,10 @@ onMounted(() => {
 
 <template>
   <div class="box">
+
+    <!-- create new blog button -->
+    <AddNewPostButtonVue />
+
     <div v-for="item in store.posts" :key="item.id">
 
         <div class="card mb-3">
