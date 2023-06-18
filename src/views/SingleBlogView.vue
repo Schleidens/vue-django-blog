@@ -19,14 +19,17 @@
 
     <div class="comment-box">
         <h3 class="fw-bold mb-3">Comment</h3>
+
+        <AddNewCommentForm :route="slug" />
+
         <div v-if="comments" class="comment">
-            <div v-for="item in comments" :key="item.id" class="card mt-1">
-                <div v-if="item.author" class="card-header">
-                    {{ item.author.username }}
+            <div v-for="item in comments" :key="item.id" class="card mt-2">
+                <div v-if="item.author" class="card-header fw-medium">
+                    @{{ item.author.username }}
                 </div>
 
-                <div class="card-body">
-                    <p>{{ item.content }}</p>
+                <div class="card-body py-2">
+                    <p class="m-0">{{ item.content }}</p>
                 </div>
             </div>
         </div>
@@ -43,6 +46,7 @@
 import { ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import ApiService from '../services/ApiService'
+import AddNewCommentForm from '../components/AddNewCommentForm.vue';
 
 const router = useRoute()
 
