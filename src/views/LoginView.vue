@@ -81,12 +81,4 @@ min-width: 350px;
     left: 0;
 
 }
-
-.disable{
-    pointer-events: none;
-  opacity: 0.5;
-  /* Additional styling to indicate disabled appearance */
-  background-color: lightgray;
-  color: gray;
-}
 </style>

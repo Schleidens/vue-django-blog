@@ -85,11 +85,4 @@ const createNewPost = async () => {
   margin: 6em 2em 0em 2em;
 }
 }
-.disable{
-    pointer-events: none;
-  opacity: 0.5;
-  /* Additional styling to indicate disabled appearance */
-  background-color: lightgray;
-  color: gray;
-}
 </style>

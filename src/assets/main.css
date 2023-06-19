@@ -10,3 +10,12 @@ body,
   height: 100%;
   width: 100%;
 }
+
+/* css class to disable an element */
+.disable{
+  pointer-events: none;
+opacity: 0.5;
+/* Additional styling to indicate disabled appearance */
+background-color: lightgray;
+color: gray;
+}
