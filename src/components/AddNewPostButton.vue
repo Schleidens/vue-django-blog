@@ -1,6 +1,6 @@
 <template>
     <div class="my-2">
-        <RouterLink to="/create/blog" role="button" class="btn btn-outline-primary w-100" :disabled="!isUserAuthenticated">
+        <RouterLink to="/create/blog" role="button" class="btn btn-outline-primary w-100" :class="isUserAuthenticated ? '' : 'disable' ">
             {{ isUserAuthenticated ? 'Create a new blog' : 'Please login to create a new blog' }}
         </RouterLink>
     </div>
