@@ -30,7 +30,10 @@ const router = createRouter({
     {
       path: '/create/blog',
       name: 'new-blog',
-      component: AddNewPostView
+      component: AddNewPostView,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: '/login',
@@ -46,6 +49,15 @@ const router = createRouter({
       },
     }
   ]
-})
+});
+
+router.beforeEach((to, from, next) => {
+  const isUserAuthenticated = isAuthenticated();
+  if(to.meta.requiresAuth && !isUserAuthenticated){
+    next({ name: 'login'});
+  } else{
+    next();
+  }
+});
 
 export default router
