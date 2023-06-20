@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import LoginView from '../views/LoginView.vue'
 import SingleBlogView from '../views/SingleBlogView.vue'
 import AddNewPostView from '../views/AddNewPostView.vue'
+import NotFoundPageView from '../views/NotFoundPageView.vue'
 
 import { isAuthenticated } from '../services/auth'
 
@@ -47,7 +48,12 @@ const router = createRouter({
           next();
         }
       },
-    }
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'notFound',
+      component: NotFoundPageView,
+    },
   ]
 });
 

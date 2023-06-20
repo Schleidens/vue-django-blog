@@ -19,3 +19,52 @@ opacity: 0.5;
 background-color: lightgray;
 color: gray;
 }
+
+.loading-dots {
+  display: flex;
+  justify-content: center;
+}
+
+.loading-dots span {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin: 0 4px;
+  border-radius: 50%;
+  background-color: #000;
+  animation: bounce .6s infinite ease-in-out alternate;
+}
+
+.loading-dots span:nth-child(1) {
+  background-color: #9DD9D2;
+  animation-delay: 0s;
+}
+
+.loading-dots span:nth-child(2) {
+  background-color: #A5FFD6;
+  animation-delay: 0.2s;
+}
+
+.loading-dots span:nth-child(3) {
+  background-color: #5CD4C8;
+  animation-delay: 0.4s;
+}
+
+.loading-dots span:nth-child(4) {
+  background-color: #86E3CE;
+  animation-delay: 0.6s;
+}
+
+.loading-dots span:nth-child(5) {
+  background-color: #48B9A3;
+  animation-delay: 0.8s;
+}
+
+@keyframes bounce {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-10px);
+  }
+}

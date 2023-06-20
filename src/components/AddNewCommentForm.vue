@@ -4,14 +4,13 @@
             <textarea v-model="comment" :placeholder="isUserAuthenticated ? 'Add a new comment' : 'Please login to add comment' " class="form-control" id="exampleFormControlTextarea1" rows="3" :disabled="!isUserAuthenticated"></textarea>
         </div>
 
-        <div @click="addNewComment" class="mb-3">
-            <button v-show="commentNotNone" type="submit" class="btn btn-primary mb-3">Publish</button>
+        <div class="mb-3">
+            <button @click="addNewComment" v-show="commentNotNone" type="submit" class="btn btn-primary mb-3">Publish</button>
          </div>
     </div>
 </template>
 
 <script setup>
-import { defineProps } from 'vue';
 import { computed, ref } from 'vue';
 import { isAuthenticated } from '../services/auth';
 import ApiService from '../services/ApiService';
@@ -40,5 +39,4 @@ const addNewComment = async () => {
 </script>
 
 <style lang="scss" scoped>
-
 </style>
