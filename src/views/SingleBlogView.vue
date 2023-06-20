@@ -38,19 +38,19 @@
         </div>
     </div>
 
-
     </div>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import ApiService from '../services/ApiService'
 import AddNewCommentForm from '../components/AddNewCommentForm.vue';
 
-const router = useRoute()
+const route = useRoute()
+const slug = route.params.slug
 
-const slug = router.params.slug
+const router = useRouter()
 
 const post = ref({})
 
@@ -58,12 +58,15 @@ const comments = ref({})
 
 const noComment = ref(false)
 
+
 async function fetchSinglePost(){
         try {
             const response = await ApiService.get(`blogs/${slug}/`);
             post.value = response.data
         } catch (error) {
-            console.log(error);
+            if(error.response.status == 404){
+                router.push({ name: 'notFound'})
+            }
         }
 }
 
@@ -83,7 +86,10 @@ async function fetchComment(){
 
 onMounted(() => {
     fetchSinglePost();
-    fetchComment();
+
+    if(post.value){
+        fetchComment();
+    }
 })
 </script>
 
