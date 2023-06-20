@@ -1,5 +1,8 @@
 <template>
-    <div class="box">
+    
+    <LoadingAnimation v-if="loading" />
+
+    <div v-else class="box">
 
         <div v-if="post" class="card mb-3">
             <img :src="post.cover" class="card-img-top cover" :alt="post.title">
@@ -46,6 +49,7 @@ import { ref, onMounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import ApiService from '../services/ApiService'
 import AddNewCommentForm from '../components/AddNewCommentForm.vue';
+import LoadingAnimation from '../components/LoadingAnimation.vue'
 
 const route = useRoute()
 const slug = route.params.slug
@@ -58,11 +62,16 @@ const comments = ref({})
 
 const noComment = ref(false)
 
+const loading = ref(false)
 
 async function fetchSinglePost(){
         try {
+            loading.value = true
+
             const response = await ApiService.get(`blogs/${slug}/`);
             post.value = response.data
+
+            loading.value = false
         } catch (error) {
             if(error.response.status == 404){
                 router.push({ name: 'notFound'})
