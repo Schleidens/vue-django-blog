@@ -21,7 +21,9 @@
                 More
             </button>
             <ul class="dropdown-menu dropdown-menu-lg-end p-0">
-                <li><a class="dropdown-item" href="#">Profile</a></li>
+                <li>
+                  <RouterLink class="dropdown-item" to="/dashboard">Dashboard</RouterLink>
+                </li>
                 <li class="mt-1">
                         <button @click="logoutUser()" type="button" class="btn btn-warning w-100">
                             Logout
