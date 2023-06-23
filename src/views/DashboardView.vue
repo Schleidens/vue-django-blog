@@ -7,9 +7,11 @@
         <div class="mt-3">
             <div v-for="post in posts" :key="post.id" class="card mb-3">
                 <div class="card-body">
-                    <h4 class="card-title fw-semibold">
-                        {{ post.title }}
-                    </h4>
+                    <RouterLink :to="`blog/${post.slug}`" class="text-decoration-none text-reset">
+                        <h3 class="card-title fw-semibold">
+                            {{ post.title }}
+                        </h3>
+                    </RouterLink>
                     <p class="card-text">
                         <small class="text-body-secondary me-2">
                             Created {{ new Date(post.created_date).toLocaleDateString() }}
@@ -20,7 +22,9 @@
                     </p>
                 </div>
                 <div class="card-footer">
-                    <button type="button" class="btn btn-primary me-3">Edit</button>
+                    <RouterLink :to="`blog/${post.slug}/edit`" type="button" class="btn btn-primary me-3">
+                        Edit
+                    </RouterLink>
                     <button @click="setDraft(post.slug)" type="button" class="btn btn-warning me-3">
                         {{ post.draft ? 'Publish' : 'Set to draft' }}
                     </button>
@@ -44,6 +48,7 @@
 <script setup>
 import { onMounted } from 'vue';
 import { ref } from 'vue';
+import { RouterLink } from 'vue-router';
 import ApiService from '../services/ApiService';
 
 const posts = ref({})
