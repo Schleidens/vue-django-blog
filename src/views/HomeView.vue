@@ -24,11 +24,8 @@ onMounted(() => {
               <img :src="item.cover" class="card-img-top cover" :alt="item.title">
             </RouterLink>
             <div class="card-body">
-              <h5 class="card-title">{{ item.title }}</h5>
-              <h6 class="card-title">{{ item.author.username }}</h6>
-              <p class="card-text">
-                {{ item.content }}
-              </p>
+              <h3 class="card-title fw-bold mb-3">{{ item.title }}</h3>
+              <h6 class="card-title">@{{ item.author.username }}</h6>
               <p class="card-text">
                 <small class="text-body-secondary">
                   Last updated {{ new Date(item.updated_date).toLocaleString()  }}

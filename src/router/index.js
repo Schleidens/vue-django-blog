@@ -5,6 +5,7 @@ import SingleBlogView from '../views/SingleBlogView.vue'
 import AddNewPostView from '../views/AddNewPostView.vue'
 import NotFoundPageView from '../views/NotFoundPageView.vue'
 import DashboardView from '../views/DashboardView.vue'
+import EditPostView from '../views/EditPostView.vue'
 
 import { isAuthenticated } from '../services/auth'
 
@@ -33,6 +34,14 @@ const router = createRouter({
       path: '/create/blog',
       name: 'new-blog',
       component: AddNewPostView,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/blog/:slug/edit',
+      name: 'edit-blog',
+      component: EditPostView,
       meta: {
         requiresAuth: true
       }
