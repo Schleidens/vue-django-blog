@@ -44,17 +44,14 @@
 </template>
 
 <script setup>
-import { RouterLink, useRouter } from 'vue-router'
+import { RouterLink } from 'vue-router'
 
 import { isAuthenticated, logout } from '../../services/auth';
 
 const isUserAuthenticated = isAuthenticated()
 
-const router = useRouter()
-
 const logoutUser = () => {
   logout();
-  router.push('/login');
 }
 </script>
 
