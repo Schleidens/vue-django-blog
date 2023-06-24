@@ -11,7 +11,7 @@ export async function login(username, password){
         ApiService.defaults.headers.common['Authorization'] = `Token ${token}`
         return true;
     } catch (error) {
-        console.log("Login failed", error.response.data.error[0])
+        return false;
     }
 }
 
@@ -20,7 +20,16 @@ export function isAuthenticated(){
     return !!token;
 }
 
-export function logout(){
-    localStorage.removeItem('token');
-    delete ApiService.defaults.headers.common['Authorization'];
+export async function logout(){
+    try {
+        const response = await ApiService.post('logout/');
+
+        if(response.status == 204){
+            localStorage.removeItem('token');
+            delete ApiService.defaults.headers.common['Authorization'];
+            window.location.reload();
+        }
+    } catch (error) {
+        console.log(error);
+    }
 }
