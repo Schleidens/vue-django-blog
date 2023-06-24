@@ -8,9 +8,11 @@ export const usePostStore = defineStore('postStore', () => {
         try {
             const response = await ApiService.get('blogs/');
             posts.value = response.data
-            console.log(posts);
         } catch (error) {
-            console.log(error);
+            if(error && error.response.status == 401){
+                window.alert("You've been logged out from the server");
+                window.location.reload();
+            }
         }
     }
     return {
