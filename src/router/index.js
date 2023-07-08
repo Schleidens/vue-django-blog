@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import RegisterView from '../views/RegisterView.vue'
 import LoginView from '../views/LoginView.vue'
 import SingleBlogView from '../views/SingleBlogView.vue'
 import AddNewPostView from '../views/AddNewPostView.vue'
@@ -53,6 +54,19 @@ const router = createRouter({
       meta: {
         requiresAuth: true
       }
+    },
+    {
+      path: '/register',
+      name: 'register',
+      component: RegisterView,
+      beforeEnter (to, from, next) {
+        const isUserAuthenticated = isAuthenticated();
+        if (isUserAuthenticated) {
+          next({ name : 'home'})
+        } else {
+          next();
+        }
+      },
     },
     {
       path: '/login',
