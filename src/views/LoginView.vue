@@ -18,6 +18,11 @@
                 <button class="btn btn-primary w-100 mt-3" type="submit">Login In</button>
                 </form>
             </div>
+            <div class="text-center mt-1 text-secondary">
+                <p>
+                    Don't have an account ? <RouterLink class="text-reset" to="/register">create one</RouterLink>
+                </p>
+            </div>
             <div class="bg-danger py-2 text-center text-light fw-medium error" v-show="error">
                 {{ error }}
             </div>
@@ -27,6 +32,7 @@
 
 <script setup>
 import { ref } from 'vue';
+import { RouterLink } from 'vue-router';
 import { login } from '../services/auth';
 
 import { useRouter } from 'vue-router';
