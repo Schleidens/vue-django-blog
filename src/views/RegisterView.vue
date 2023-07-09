@@ -37,17 +37,27 @@
                 <div class="mt-2">
                     <button type="submit" class="btn btn-primary w-100" :disabled="validate">Register</button>
                 </div>
+
+                <div class="text-center mt-1 text-light">
+                    <p>
+                        Already have an account ? <RouterLink class="text-reset" to="/login">login here</RouterLink>
+                    </p>
+                </div>
             </form>
+            <div class="bg-danger py-2 text-center text-light fw-medium error" v-show="error">
+                {{ error }}
+            </div>
         </div>
 
         <div class="register__box">
-            {{ validate }}
+            <img src="../assets/register.svg" alt="">
         </div>
     </div>
 </template>
 
 <script setup>
 import { computed, ref } from 'vue';
+import { register } from '../services/auth'
 
 const data = ref({
     first_name: "",
@@ -58,6 +68,7 @@ const data = ref({
     password_confirm: ""
 });
 
+const error = ref("");
 const passwordError = ref("");
 
 const validate = computed(() =>{
@@ -68,13 +79,20 @@ const validate = computed(() =>{
     }
 });
 
-const HandleRegister = () => {
+const HandleRegister = async () => {
+
     if((data.value.password.length < 8) && (data.value.password_confirm.length < 8)){
         passwordError.value = "Password should be 8+ characters and contain numbers, letters"
     }else if(data.value.password != data.value.password_confirm){
         passwordError.value = "Password not match";
     }else{
-        alert("we good")
+        const success = await register(data.value);
+
+        if(success){
+            window.location.reload();
+        }else{
+            error.value = "Something's wrong try again"
+        }
     }
 }
 
@@ -104,6 +122,16 @@ const HandleRegister = () => {
 
         &:nth-child(2){
             background-image: linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%);
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            img{
+                max-width: 400px;
+
+                transform: scaleX(-1);
+            }
         }
     }
 }
@@ -123,5 +151,12 @@ const HandleRegister = () => {
         }
     }
 }
+}
+
+.error{
+    position: fixed;
+    top: 56px;
+    right: 0;
+    left: 0;
 }
 </style>
