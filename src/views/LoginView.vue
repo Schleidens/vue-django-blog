@@ -35,9 +35,6 @@ import { ref } from 'vue';
 import { RouterLink } from 'vue-router';
 import { login } from '../services/auth';
 
-import { useRouter } from 'vue-router';
-const router = useRouter();
-
 const username = ref('')
 const password = ref('')
 
@@ -53,7 +50,7 @@ const handleLogin = async (event) => {
     const success = await login(username.value, password.value)
 
     if (success) {
-        router.push('/')
+        window.location.reload();
     } else {
         error.value = "We couldn’t find an account matching the username and password you entered. Please check your username and password and try again.";
     }
