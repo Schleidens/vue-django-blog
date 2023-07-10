@@ -20,9 +20,9 @@ export async function register(data){
 }
 
 // function to log in obtain a token
-export async function login(username, password){
+export async function login(data){
     try {
-        const response = await ApiService.post('login/', { username, password });
+        const response = await ApiService.post('login/', data);
         const token = response.data.token
         //set token in localStorage
         localStorage.setItem('token', token);
