@@ -5,14 +5,14 @@
                 <h1 class="fw-bold text-uppercase text-light">Login</h1>
             </div>
             <div class="mx-auto rounded p-3 glass" :class="isDisable ? 'disable' : ''">
-                <form @submit="handleLogin">
+                <form @submit.prevent="handleLogin">
                 <div class="form-floating mb-3">
-                    <input type="text" v-model="username" class="form-control" id="floatingInput" placeholder="Username">
+                    <input type="text" v-model="data.username" class="form-control" id="floatingInput" placeholder="Username">
                     <label for="floatingInput">Username</label>
                 </div>
 
                 <div class="form-floating">
-                    <input type="password" v-model="password" class="form-control" id="floatingPassword" placeholder="Password">
+                    <input type="password" v-model="data.password" class="form-control" id="floatingPassword" placeholder="Password">
                     <label for="floatingPassword">Password</label>
                 </div>
                 <button class="btn btn-primary w-100 mt-3" type="submit">Login In</button>
@@ -35,19 +35,20 @@ import { ref } from 'vue';
 import { RouterLink } from 'vue-router';
 import { login } from '../services/auth';
 
-const username = ref('')
-const password = ref('')
+const data = ref({
+    username: "",
+    password: ""
+})
 
 const error = ref('')
 
 const isDisable =  ref(false)
 
-const handleLogin = async (event) => {
-    event.preventDefault();
+const handleLogin = async () => {
 
     isDisable.value = true
 
-    const success = await login(username.value, password.value)
+    const success = await login(data.value)
 
     if (success) {
         window.location.reload();
