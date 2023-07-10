@@ -5,7 +5,6 @@ export async function register(data){
     try {
         const response = await ApiService.post('register/', data);
         const token = response.data.token
-        console.log(response.data.message);
         
         // set the token to local storage
         localStorage.setItem('token', token);
@@ -14,7 +13,6 @@ export async function register(data){
 
         return true;
     } catch (error) {
-        console.log(error.response.data);
         return false;
     }
 }

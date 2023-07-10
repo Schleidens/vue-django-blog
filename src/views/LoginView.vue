@@ -5,7 +5,7 @@
                 <h1 class="fw-bold text-uppercase text-light">Login</h1>
             </div>
             <div class="mx-auto rounded p-3 glass" :class="isDisable ? 'disable' : ''">
-                <form @submit="handleLogin">
+                <form @submit.prevent="handleLogin">
                 <div class="form-floating mb-3">
                     <input type="text" v-model="data.username" class="form-control" id="floatingInput" placeholder="Username">
                     <label for="floatingInput">Username</label>
@@ -44,8 +44,7 @@ const error = ref('')
 
 const isDisable =  ref(false)
 
-const handleLogin = async (event) => {
-    event.preventDefault();
+const handleLogin = async () => {
 
     isDisable.value = true
 
