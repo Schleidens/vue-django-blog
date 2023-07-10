@@ -55,9 +55,15 @@ const updatePost = async () => {
         isDisable.value = true
 
         const response = await ApiService.put(`user-blogs/${slug}/`, data.value);
+        console.log(response.data.draft);
 
-        if(response.status == 200){
+        //redirect to the post if post is not draft and to dashboard if it draft
+        if((response.status == 200) && (response.data.draft == false)){
             router.push(`/blog/${slug}`)
+        }else if((response.status == 200) && (response.data.draft == true)){
+            router.push("/dashboard")
+        }else{
+            router.push("/")
         }
         
     } catch (error) {
