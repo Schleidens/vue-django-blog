@@ -61,7 +61,7 @@ const updatePost = async () => {
         if((response.status == 200) && (response.data.draft == false)){
             router.push(`/blog/${slug}`)
         }else if((response.status == 200) && (response.data.draft == true)){
-            router.push("/dashboard")
+            router.push(`/dashboard/blog/${slug}`)
         }else{
             router.push("/")
         }

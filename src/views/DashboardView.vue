@@ -7,7 +7,7 @@
         <div class="mt-3">
             <div v-for="post in posts" :key="post.id" class="card mb-3">
                 <div class="card-body">
-                    <RouterLink :to="`blog/${post.slug}`" class="text-decoration-none text-reset">
+                    <RouterLink :to="`dashboard/blog/${post.slug}`" class="text-decoration-none text-reset">
                         <h3 class="card-title fw-semibold">
                             {{ post.title }}
                         </h3>
@@ -59,7 +59,6 @@ const fetchPost = async () => {
     try {
         const response = await ApiService.get('user-blogs/');
         posts.value = response.data
-        console.log(posts);
     } catch (error) {
         console.log(error);
     }
