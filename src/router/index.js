@@ -7,6 +7,7 @@ import AddNewPostView from '../views/AddNewPostView.vue'
 import NotFoundPageView from '../views/NotFoundPageView.vue'
 import DashboardView from '../views/DashboardView.vue'
 import EditPostView from '../views/EditPostView.vue'
+import DashboardBlogView from '../views/DashboardBlogView.vue'
 
 import { isAuthenticated } from '../services/auth'
 
@@ -51,6 +52,14 @@ const router = createRouter({
       path: '/dashboard',
       name: 'dashboard',
       component: DashboardView,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/dashboard/blog/:slug',
+      name: 'dashboardBlog',
+      component: DashboardBlogView,
       meta: {
         requiresAuth: true
       }
